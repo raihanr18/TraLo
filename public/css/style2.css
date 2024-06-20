@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.w3-container h2 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.w3-container label {
+    display: block;
+    margin: 12px 0 6px;
+}
+
+.w3-input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.w3-bar-block a {
+    text-decoration: none;
+    color: black;
+}
+
+.w3-bar-block a:hover {
+    background-color: #ccc;
+}

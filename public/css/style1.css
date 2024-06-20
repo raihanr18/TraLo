@@ -1,0 +1,139 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #f3f3f3;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-item {
+    margin: 20px 0;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    color: #007BFF;
+}
+
+.main-content {
+    width: 80%;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-bar {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.logo {
+    width: 80px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    width: 23%;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-info {
+    padding: 10px;
+    text-align: center;
+}
+
+.card-info h2 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.card-info p {
+    color: green;
+    font-size: 16px;
+}
+
+.ticket-card {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 200%;
+  }
+  .ticket-card img {
+    border-radius: 8px;
+    margin-right: 20px;
+    width: 200px;
+    height: 200px;
+  }
+  .ticket-details {
+    flex-grow: 1;
+  }
+  .ticket-details h3 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+  .ticket-details p {
+    margin: 8px 0;
+    font-size: 0.9em;
+    color: grey;
+  }
+  .ticket-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .ticket-actions button {
+    margin-top: 130px;
+  }
