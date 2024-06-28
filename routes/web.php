@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MyticketController;
 use App\Http\Controllers\MyorderController;
 use App\Http\Controllers\MyaccountController;
+use App\Http\Controllers\MembuatPesananController;
+use App\Http\Controllers\MetodePembayaranController;
+use App\Http\Controllers\ForgotPasswordController;
 
 
 /*
@@ -22,23 +24,34 @@ use App\Http\Controllers\MyaccountController;
 |
 */
 
+//Welcome
 Route::get('/', function () {
     return view('index');
 });
 
+//Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
 
-Route::get('/signup', [RegisterController::class, 'showsignup'])->name('signup');
-Route::post('/signup', [RegisterController::class, 'signup']);
+//Register
+Route::get('/signup', [RegisterController::class, 'showSignupForm'])->name('signup.form');
+Route::post('/signup', [RegisterController::class, 'signup'])->name('signup');
+Route::get('/verification', [RegisterController::class, 'showVerificationForm'])->name('verification.form');
+Route::post('/verification', [RegisterController::class, 'verify'])->name('verify');
 
-Route::get('/forgotpassword', [ForgotController::class, 'showsforgotpassword'])->name('forgotpassword');
-Route::post('/forgotpassword', [ForgotController::class, 'forgotpassword']);
 
-Route::get('/resetPassword', [ResetController::class, 'showsresetPassword'])->name('resetPassword');
-Route::post('/resetPassword', [ResetController::class, 'showsresetPassword'])->name('resetPassword');
 
-Route::get('/dashboard', [DashboardController::class, 'showdashboard'])->name('dashboard');
+Route::get('/forgotpassword', [ForgotPasswordController::class, 'showsforgotpassword'])->name('forgotpassword');
+Route::post('/forgotpassword', [ForgotPasswordController::class, 'forgotpassword']);
+Route::post('/send-otp', [ForgotPasswordController::class, 'sendOtp'])->name('sendOtp');
+Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOtp'])->name('verifyOtp');
+
+Route::get('/reset-password', function () {
+    return view('resetpassword'); 
+})->name('showResetPasswordForm');
+Route::post('/reset-password', [ResetController::class, 'resetPassword'])->name('resetPassword');
+
+Route::get('/dashboard', [DashboardController::class, 'showdashboard'])->middleware('auth')->name('dashboard');
 Route::post('/dashboard', [DashboardController::class, 'showdashboard'])->name('dashboard');
 
 Route::get('/myticket', [MyticketController::class, 'showmyticket'])->name('myticket');
@@ -49,3 +62,9 @@ Route::post('/myorder', [MyorderController::class, 'showmyorder'])->name('myorde
 
 Route::get('/myaccount', [MyaccountController::class, 'showmyaccount'])->name('myaccount');
 Route::post('/myaccount', [MyaccountController::class, 'showmyaccount'])->name('myaccount');
+
+Route::get('/membuatpesanan', [MembuatPesananController::class, 'showmembuatpesanan'])->name('membuatpesanan');
+Route::post('/membuatpesanan', [MembuatPesananController::class, 'showmembuatpesanan'])->name('membuatpesanan');
+
+Route::get('/metodepembayaran', [MetodePembayaranController::class, 'showmetodepembayaran'])->name('metodepembayaran');
+Route::post('/metodepembayaran', [MetodePembayaranController::class, 'showmetodepembayaran'])->name('metodepembayaran');
