@@ -1,0 +1,29 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.ticket-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.ticket-section img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
+.calendar-section {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+.ticket-count {
+    display: flex;
+    align-items: center;
+}
+.ticket-count input {
+    width: 50px;
+    text-align: center;
+}

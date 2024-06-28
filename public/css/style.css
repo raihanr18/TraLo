@@ -89,6 +89,7 @@ body, html {
 }
 
 .login-form input[type="text"],
+.login-form input[type="email"],
 .login-form input[type="password"],
 .login-form button {
     width: 100%;
@@ -154,3 +155,4 @@ body, html {
 .login-form .remember-me input {
     margin-right: 10px;
 }
+
