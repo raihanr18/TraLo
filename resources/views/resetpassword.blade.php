@@ -10,17 +10,31 @@
         <div class="login-image"></div>
         <div class="login-form">
             <h2>Reset Password?</h2>
+            
+            @if(session('message'))
+                <p>{{ session('message') }}</p>
+            @endif
+
+            @if(session('error'))
+                <p style="color: red;">{{ session('error') }}</p>
+            @endif
+
+            @if ($errors->any())
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li style="color: red;">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
             <form action="{{ route('resetPassword') }}" method="POST">
                 @csrf
-                
-                <input type="password" name="password" placeholder="Password" value="">
-                <input type="password" name="confirm password" placeholder="Confirm Password" value="">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <button type="submit">Verifikasi Email</button>
+                <input type="hidden" name="email" value="{{ session('otp_email') }}">
+                <input type="password" name="password" placeholder="New Password" required>
+                <input type="password" name="password_confirmation" placeholder="Confirm New Password" required>
+                <button type="submit">Reset Password</button>
             </form>
         </div>
     </div>

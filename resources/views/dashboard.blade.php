@@ -17,7 +17,7 @@
         <a href="{{ route('myticket') }}" class="w3-bar-item w3-button">My Tickets</a>
         <a href="{{ route('myorder') }}" class="w3-bar-item w3-button">My Orders</a>
         <a href="{{ route('myaccount') }}" class="w3-bar-item w3-button">Account</a>
-        <a href="#" class="w3-bar-item w3-button">Logout</a>
+        <a href="{{ route('login') }}" class="w3-bar-item w3-button">Logout</a>
     </div>
 
     <div style="margin-left:20%">
@@ -34,7 +34,7 @@
                         <img src="img/view4.png" alt="Nama Wisata 1" style="width:100%; height:200px; object-fit:cover; ">
                         <div class="w3-container w3-center">
                             <h2>Gunung Bohong</h2>
-                            <button class="w3-button w3-green w3-border w3-border-green w3-round-large">Rp 100.000,00</button>
+                        <button class="w3-button w3-green w3-border w3-border-green w3-round-large"> <a href="{{ route('membuatpesanan') }}">  Rp 100.000,00</a></button>
                         </div>
                     </div>
                 </div>

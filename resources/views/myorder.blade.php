@@ -17,7 +17,7 @@
     <a href="{{ route('myticket') }}" class="w3-bar-item w3-button">My Tickets</a>
     <a href="{{ route('myorder') }}" class="w3-bar-item w3-button">My Orders</a>
     <a href="{{ route('myaccount') }}" class="w3-bar-item w3-button">Account</a>
-    <a href="#" class="w3-bar-item w3-button">Logout</a>
+    <a href="{{ route('login') }}" class="w3-bar-item w3-button">Logout</a>
   </div>
 
   <div style="margin-left:20%">
@@ -40,7 +40,7 @@
           <button class="w3-button w3-red w3-round-xxlarge">Batalkan Pemesanan</button>
         </div>
         <div class="ticket-actions right">
-          <button class="w3-button w3-green w3-round-xxlarge">Lanjutkan Pembayaran</button>
+          <button class="w3-button w3-green w3-round-xxlarge"><a href="{{ route('metodepembayaran') }}">Lanjutkan Pembayaran</a></button>
         </div>
       </div>
     </div>

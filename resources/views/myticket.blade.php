@@ -17,7 +17,7 @@
     <a href="{{ route('myticket') }}" class="w3-bar-item w3-button">My Tickets</a>
     <a href="{{ route('myorder') }}" class="w3-bar-item w3-button">My Orders</a>
     <a href="{{ route('myaccount') }}" class="w3-bar-item w3-button">Account</a>
-    <a href="#" class="w3-bar-item w3-button">Logout</a>
+    <a href="{{ route('login') }}" class="w3-bar-item w3-button">Logout</a>
   </div>
 
   <div style="margin-left:20%">
