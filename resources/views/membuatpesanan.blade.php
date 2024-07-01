@@ -6,6 +6,32 @@
     <title>Wisata Booking</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/pesan.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .ticket-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .ticket-section img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .ticket-count {
+            display: flex;
+            align-items: center;
+        }
+        .ticket-count input {
+            width: 50px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,82 +42,75 @@
             <h1 class="w3-right">Wisata Booking</h1>
         </header>
 
-        <div class="w3-container ticket-section">
-            <div>
-                <img src="img/view1.png" alt="Nama Wisata">
-            </div>
-            <div>
-                <h2>Nama Wisata</h2>
-                <p>Alamat Wisata</p>
-                <p>Deskripsi Wisata</p>
-            </div>
-        </div>
+        <form method="POST" action="{{ route('store.order') }}" onsubmit="return validateForm()">
+            @csrf
 
-        <div class="w3-container">
-            <div class="calendar-section" id="calendar-section">
-                <button class="w3-button w3-circle w3-green" onclick="prevWeek()">&lt;</button>
-                <button class="w3-button w3-light-grey" id="day1" onclick="selectDate(this)"><br></button>
-                <button class="w3-button w3-light-grey" id="day2" onclick="selectDate(this)"><br></button>
-                <button class="w3-button w3-light-grey" id="day3" onclick="selectDate(this)"><br></button>
-                <button class="w3-button w3-light-grey" id="day4" onclick="selectDate(this)"><br></button>
-                <button class="w3-button w3-light-grey" id="day5" onclick="selectDate(this)"><br></button>
-                <button class="w3-button w3-circle w3-green" onclick="nextWeek()">&gt;</button>
-            </div>
-        </div>
+            <input type="hidden" name="id_wisata" value="{{ $wisata->id_wisata }}">
 
-        <div class="w3-container ticket-section">
-            <div>
-                <p>Harga Tiket: Rp 100.000,00</p>
+            <div class="w3-container ticket-section">
+                <div>
+                    <img src="{{ asset('img/' . $wisata->gambar_wisata) }}" alt="{{ $wisata->nama_wisata }}">
+                </div>
+                <div>
+                    <h2>{{ $wisata->nama_wisata }}</h2>
+                    <p>{{ $wisata->alamat_wisata }}</p>
+                    <p>{{ $wisata->deskripsi_wisata }}</p>
+                </div>
             </div>
-            <div class="ticket-count">
-                <button class="w3-button w3-light-grey" onclick="decreaseTicketCount()">-</button>
-                <input type="number" id="ticket-count" value="1" min="1" onchange="updateTotalPrice()">
-                <button class="w3-button w3-light-grey" onclick="increaseTicketCount()">+</button>
+
+            <div class="w3-container">
+                <div class="ticket-section">
+                    <label for="tanggal_kunjungan">Pilih Tanggal:</label>
+                    <input type="date" id="tanggal_kunjungan" name="tanggal_kunjungan" onchange="updateTotalPrice()">
+                </div>
             </div>
-        </div>
 
-        <div class="w3-container">
-            <h3>Harga Total: Rp <span id="total-price">100.000,00</span></h3>
-            <h3>Tiket Untuk Tanggal: <span id="selected-date"></span></h3>
-        </div>
+            <div class="w3-container ticket-section">
+                <div>
+                    <p>Harga Tiket: Rp {{ number_format($wisata->harga_wisata) }}</p>
+                </div>
+                <div class="ticket-count">
+                    <button type="button" class="w3-button w3-light-grey" onclick="decreaseTicketCount()">-</button>
+                    <input type="number" id="jumlah_tiket" name="jumlah_tiket" value="1" min="1" onchange="updateTotalPrice()">
+                    <button type="button" class="w3-button w3-light-grey" onclick="increaseTicketCount()">+</button>
+                </div>
+            </div>
 
-        <footer class="w3-container w3-green w3-padding">
-            <button class="w3-button w3-white w3-border w3-border-green w3-round w3-right"><a href="{{ route('myorder') }}">Buat Pesanan</a></button>
-        </footer>
+            <div class="w3-container">
+                <h3>Harga Total: Rp <span id="harga_total">{{ number_format($wisata->harga_wisata) }}</span></h3>
+                <h3>Tiket Untuk Tanggal: <span id="tanggal_kunjungan-text"></span></h3>
+            </div>
+
+            <footer class="w3-container w3-green w3-padding">
+                <button type="submit" class="w3-button w3-white w3-border w3-border-green w3-round w3-right">Buat Pesanan</button>
+                <div id="error-message" style="color: white; font-weight: bold;"></div>
+            </footer>
+        </form>
     </div>
 </div>
 
 <script>
-    let currentWeekStart = new Date();
-    const ticketPrice = 100000;
-
-    function updateCalendar() {
-        const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
-        for (let i = 0; i < 5; i++) {
-            const date = new Date(currentWeekStart);
-            date.setDate(currentWeekStart.getDate() + i);
-            document.getElementById(`day${i + 1}`).innerHTML = `${days[date.getDay()]}<br>${date.getDate()} ${date.toLocaleString('id-ID', { month: 'short' })} ${date.getFullYear()}`;
+    function validateForm() {
+        const selectedDate = document.getElementById("tanggal_kunjungan").value;
+        if (!selectedDate) {
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = "Silakan pilih tanggal kunjungan.";
+            return false; // Prevent form submission
         }
+        return true; // Allow form submission
     }
-
-    function prevWeek() {
-        currentWeekStart.setDate(currentWeekStart.getDate() - 5);
-        updateCalendar();
-    }
-
-    function nextWeek() {
-        currentWeekStart.setDate(currentWeekStart.getDate() + 5);
-        updateCalendar();
-    }
+    const ticketPrice = {{ $wisata->harga_wisata }};
 
     function updateTotalPrice() {
-        const ticketCount = document.getElementById("ticket-count").value;
+        const selectedDate = document.getElementById("tanggal_kunjungan").value;
+        document.getElementById("tanggal_kunjungan-text").textContent = selectedDate;
+        const ticketCount = document.getElementById("jumlah_tiket").value;
         const totalPrice = ticketPrice * ticketCount;
-        document.getElementById("total-price").textContent = totalPrice.toLocaleString('id-ID', { minimumFractionDigits: 2 });
+        document.getElementById("harga_total").textContent = totalPrice.toLocaleString('id-ID');
     }
 
     function decreaseTicketCount() {
-        const ticketCountInput = document.getElementById("ticket-count");
+        const ticketCountInput = document.getElementById("jumlah_tiket");
         let ticketCount = parseInt(ticketCountInput.value);
         if (ticketCount > 1) {
             ticketCount--;
@@ -101,19 +120,13 @@
     }
 
     function increaseTicketCount() {
-        const ticketCountInput = document.getElementById("ticket-count");
+        const ticketCountInput = document.getElementById("jumlah_tiket");
         let ticketCount = parseInt(ticketCountInput.value);
         ticketCount++;
         ticketCountInput.value = ticketCount;
         updateTotalPrice();
     }
 
-    function selectDate(button) {
-        const selectedDate = button.innerHTML.split('<br>').join(' ');
-        document.getElementById("selected-date").textContent = selectedDate;
-    }
-
-    updateCalendar();
     updateTotalPrice();
 </script>
 

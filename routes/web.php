@@ -53,18 +53,20 @@ Route::post('/reset-password', [ResetController::class, 'resetPassword'])->name(
 
 Route::get('/dashboard', [DashboardController::class, 'showdashboard'])->middleware('auth')->name('dashboard');
 Route::post('/dashboard', [DashboardController::class, 'showdashboard'])->name('dashboard');
+Route::get('/search', [DashboardController::class, 'search'])->name('search');
 
 Route::get('/myticket', [MyticketController::class, 'showmyticket'])->name('myticket');
 Route::post('/myticket', [MyticketController::class, 'showmyticket'])->name('myticket');
 
 Route::get('/myorder', [MyorderController::class, 'showmyorder'])->name('myorder');
-Route::post('/myorder', [MyorderController::class, 'showmyorder'])->name('myorder');
+Route::put('/myorder/batalkan/{id}', [MyorderController::class, 'batalkanPemesanan'])->name('batalkanPemesanan');
 
 Route::get('/myaccount', [MyaccountController::class, 'showmyaccount'])->name('myaccount');
 Route::post('/myaccount', [MyaccountController::class, 'showmyaccount'])->name('myaccount');
 
-Route::get('/membuatpesanan', [MembuatPesananController::class, 'showmembuatpesanan'])->name('membuatpesanan');
-Route::post('/membuatpesanan', [MembuatPesananController::class, 'showmembuatpesanan'])->name('membuatpesanan');
+Route::get('/membuatpesanan/{id_wisata}', [MembuatPesananController::class, 'showmembuatpesanan'])->name('membuatpesanan');
+Route::post('/store-order', [MembuatPesananController::class, 'storeOrder'])->name('store.order');
 
-Route::get('/metodepembayaran', [MetodePembayaranController::class, 'showmetodepembayaran'])->name('metodepembayaran');
-Route::post('/metodepembayaran', [MetodePembayaranController::class, 'showmetodepembayaran'])->name('metodepembayaran');
+Route::get('/metodepembayaran/{id_pesan}', [MetodePembayaranController::class, 'showmetodepembayaran'])->name('metodepembayaran');
+Route::post('/metodepembayaran/{id_pesan}', [MetodePembayaranController::class, 'showmetodepembayaran'])->name('metodepembayaran');
+Route::post('/bayar/{id_pesan}', [MetodePembayaranController::class, 'bayar'])->name('bayar');

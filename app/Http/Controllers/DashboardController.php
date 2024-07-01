@@ -2,15 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Wisata;
 
 class DashboardController extends Controller
 {
-    
     public function showdashboard()
     {
-        return view('dashboard'); // Sesuaikan dengan nama view yang Anda gunakan
+        $wisatas = Wisata::all();
+        return view('dashboard', compact('wisatas'));
     }
-    
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        $wisatas = Wisata::where('nama_wisata', 'LIKE', "%{$query}%")
+            ->orWhere('alamat_wisata', 'LIKE', "%{$query}%")
+            ->get();
+
+        return view('dashboard', compact('wisatas'));
+    }
 }

@@ -23,12 +23,12 @@
     <div style="margin-left:20%">
         <div class="w3-container w3-padding-16">
             <h2>Account</h2>
-            <form class="w3-container">
+            <form class="w3-container " style="width:200%">
                 <label for="nama">Nama Lengkap</label>
-                <input class="w3-input w3-border" type="text" id="nama" name="nama" readonly="readonly" value="Antonio">
-
+                <input class="w3-input w3-border" type="text" id="nama" name="nama" readonly="readonly" value="{{ $user->name }}">
+                <br>
                 <label for="email">Email</label>
-                <input class="w3-input w3-border" type="email" id="email" name="email" readonly="readonly" value="Antonio@gmail.com">
+                <input class="w3-input w3-border" type="email" id="email" name="email" readonly="readonly" value="{{ $user->email }}">
             </form>
         </div>
     </div>

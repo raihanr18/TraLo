@@ -56,39 +56,42 @@
             <h1 class="w3-right">Pilih Metode Pembayaran</h1>
         </header>
 
-        <div class="w3-container payment-methods">
-            <label class="payment-method">
-                <input type="radio" name="payment" value="DANA">
-                <img src="img/dana.jpeg" alt="DANA">
-            </label>
-            <label class="payment-method">
-                <input type="radio" name="payment" value="gopay">
-                <img src="img/gopay.png" alt="gopay">
-            </label>
-            <label class="payment-method">
-                <input type="radio" name="payment" value="QRIS">
-                <img src="img/qris.jpg" alt="QRIS">
-            </label>
-        </div>
+        <form action="{{ route('bayar', ['id_pesan' => $pesantiket->id_pesan]) }}" method="POST">
+            @csrf
+            <div class="w3-container payment-methods">
+                <label class="payment-method">
+                    <input type="radio" name="payment" value="dana" required>
+                    <img src="img/dana.jpeg" alt="DANA">
+                </label>
+                <label class="payment-method">
+                    <input type="radio" name="payment" value="gopay" required>
+                    <img src="img/gopay.png" alt="gopay">
+                </label>
+                <label class="payment-method">
+                    <input type="radio" name="payment" value="qris" required>
+                    <img src="img/qris.jpg" alt="QRIS">
+                </label>
+            </div>
 
-        <div class="w3-container total-price">
-            <span>Harga Total</span>
-            <span>Rp 200.000,00</span>
-        </div>
+            <div class="w3-container total-price">
+                <span>Harga Total</span>
+                <span>Rp {{ number_format($pesantiket->harga_total, 2, ',', '.') }}</span>
+            </div>
 
-        <div class="w3-container">
-            <button class="w3-button w3-green w3-block">Bayar</button>
-        </div>
+            <div class="w3-container">
+                <button type="submit" class="w3-button w3-green w3-block">Bayar</button>
+            </div>
+        </form>
 
         <div class="w3-container order-details">
-            <h3>No. Pesanan 110294456</h3>
+            <h3>No. Pesanan {{ $pesantiket->id_pesan }}</h3>
             <p><strong>Alamat Wisata</strong></p>
-            <p>Masa Berlaku Pesanan: Rabu, 1 Mei 2024</p>
-            <p>Jumlah Tiket: 2</p>
+            <p>Tanggal kunjungan: {{ $pesantiket->tanggal_kunjungan }}</p>
+            <p>Jumlah Tiket: {{ $pesantiket->jumlah_tiket }}</p>
             <hr>
             <p><strong>Tamu</strong></p>
-            <p>Nama: (nama)</p>
-            <p>Email: (email)</p>
+            <p>Nama: {{ $pesantiket->user->name }}</p>
+            <p>Email: {{ $pesantiket->user->email }}</p>
         </div>
     </div>
 </div>
