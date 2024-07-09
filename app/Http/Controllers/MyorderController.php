@@ -11,7 +11,7 @@ use App\Models\User;
 class MyorderController extends Controller
 {
     public function showmyorder()
-    {
+    {   
         $user = User::findOrFail(auth()->id());
 
         $userId = Auth::id();
