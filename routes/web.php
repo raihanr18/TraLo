@@ -63,6 +63,7 @@ Route::put('/myorder/batalkan/{id}', [MyorderController::class, 'batalkanPemesan
 
 Route::get('/myaccount', [MyaccountController::class, 'showmyaccount'])->name('myaccount');
 Route::post('/myaccount', [MyaccountController::class, 'showmyaccount'])->name('myaccount');
+Route::post('/update-profile-picture', [MyaccountController::class, 'updateProfilePicture'])->name('updateProfilePicture');
 
 Route::get('/membuatpesanan/{id_wisata}', [MembuatPesananController::class, 'showmembuatpesanan'])->name('membuatpesanan');
 Route::post('/store-order', [MembuatPesananController::class, 'storeOrder'])->name('store.order');

@@ -37,8 +37,10 @@ class RegisterController extends Controller
         session([
             'signup_data' => [
                 'name' => $request->fullname,
+                'foto' => 'default.jpg',
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'role' => 'member',
                 'otp' => $otp,
             ]
         ]);
@@ -71,8 +73,10 @@ class RegisterController extends Controller
     if ($signupData['otp'] == $request->token) {
         $user = User::create([
             'name' => $signupData['name'],
+            'foto' => $signupData['foto'],
             'email' => $signupData['email'],
             'password' => $signupData['password'],
+            'role' => $signupData['role'],
             'email_verified_at' => now(),
         ]);
 

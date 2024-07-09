@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wisata;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
     public function showdashboard()
     {
+        $user = User::findOrFail(auth()->id());
         $wisatas = Wisata::all();
-        return view('dashboard', compact('wisatas'));
+        return view('dashboard', compact('user', 'wisatas'));
     }
 
     public function search(Request $request)

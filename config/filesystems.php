@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'profil' => [
+            'driver' => 'local',
+            'root' => public_path('profil'), // Path ke folder 'public/profil'
+            'url' => env('APP_URL').'/profil', // URL ke folder 'public/profil'
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

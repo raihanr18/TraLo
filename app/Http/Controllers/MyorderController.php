@@ -6,18 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\PesanTiket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class MyorderController extends Controller
 {
     public function showmyorder()
     {
+        $user = User::findOrFail(auth()->id());
+
         $userId = Auth::id();
 
         $pesanTikets = PesanTiket::where('id_user', $userId)
             ->where('status_pembayaran', 'proses')
             ->get();
 
-        return view('myorder', compact('pesanTikets'));
+        return view('myorder', compact('pesanTikets','user'));
     }
 
     public function batalkanPemesanan(Request $request, $id)
