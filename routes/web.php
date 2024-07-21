@@ -27,7 +27,7 @@ use App\Http\Controllers\ForgotPasswordController;
 //Welcome
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
 
 //Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
