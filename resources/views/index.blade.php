@@ -4,7 +4,7 @@
     <title>TraLo | Wisata Pilihan Anda</title>
     
     @vite(['resources/css/app.css','resources/js/app.js'])
-    
+
 </head>
 <body class="h-screen m-0 font-urbanist">
 
@@ -231,7 +231,7 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-6">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Your Company. All rights reserved.</p>
+            <p>&copy; 2024 TraLo. All rights reserved.</p>
         </div>
     </footer>
 
