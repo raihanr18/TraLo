@@ -23,10 +23,10 @@
 
         <div class="absolute top-2.5 right-2.5 flex space-x-2 font-urbanist">
             <a href="{{ route('signup') }}" class="ml-2 px-4 py-2 w-24 sm:w-28 text-center rounded-full border-2 border-transparent text-white no-underline font-bold bg-transparent hover:border-white transition duration-300">
-                Sign Up
+                Daftar
             </a>
             <a href="{{ route('login') }}" class="ml-2 px-4 py-2 w-24 sm:w-28 text-center rounded-full bg-white text-black no-underline font-bold transition duration-300 transform hover:bg-gray-200">
-                Login
+                Masuk
             </a>
         </div>
     </div>
@@ -61,16 +61,16 @@
                 </div>
                 <div class="w-full md:w-1/3 p-4">
                     <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                        <img src="img/icon/explore.png" alt="Jelajahi Destinasi" class="w-16 h-16 mb-4">
-                        <h3 class="text-2xl font-bold mb-2 text-center">Jelajahi Destinasi</h3>
-                        <p class="text-gray-600 text-center">Temukan destinasi menarik dan simpan rencana perjalanan Anda dengan    mudah.</p>
+                        <img src="img/icon/family-trip.png" alt="Nikmati Liburan" class="w-16 h-16 mb-4">
+                        <h3 class="text-2xl font-bold mb-2 text-center">Nikmati Liburan Anda</h3>
+                        <p class="text-gray-600 text-center">Rasakan pengalaman liburan yang memukau dan jelajahi keindahan yang belum pernah Anda lihat.</p>
                     </div>
                 </div>
                 <div class="w-full md:w-1/3 p-4">
                     <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
-                        <img src="img/icon/family-trip.png" alt="Nikmati Liburan" class="w-16 h-16 mb-4">
-                        <h3 class="text-2xl font-bold mb-2 text-center">Nikmati Liburan Anda</h3>
-                        <p class="text-gray-600 text-center">Rasakan pengalaman liburan yang memukau dan jelajahi keindahan yang    belum pernah Anda lihat.</p>
+                        <img src="img/icon/explore.png" alt="Jelajahi Destinasi" class="w-16 h-16 mb-4">
+                        <h3 class="text-2xl font-bold mb-2 text-center">Jelajahi Destinasi</h3>
+                        <p class="text-gray-600 text-center">Temukan destinasi menarik dan simpan rencana perjalanan Anda dengan mudah.</p>
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-800">Tentang Kami</h2>
-                <p class="text-gray-600 mt-4">Kami adalah agen perjalanan yang menyediakan pengalaman wisata terbaik.</p>
+                <p class="text-gray-600 mt-4">Kami adalah agen perjalanan yang menyediakan pengalaman wisata lokal terbaik.</p>
             </div>
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-1/2 lg:w-1/2 px-4 mb-8">
@@ -165,7 +165,7 @@
                             <img src="https://via.placeholder.com/40" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
                             <div>
                                 <p class="text-gray-800 font-bold">John Doe</p>
-                                <p class="text-gray-600">CEO, Example Company</p>
+                                <p class="text-gray-600">CEO, Lorem Company</p>
                             </div>
                         </div>
                     </div>
@@ -177,7 +177,7 @@
                             <img src="https://via.placeholder.com/40" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
                             <div>
                                 <p class="text-gray-800 font-bold">Jane Smith</p>
-                                <p class="text-gray-600">CTO, Another Company</p>
+                                <p class="text-gray-600">CTO, Ipsum Company</p>
                             </div>
                         </div>
                     </div>
@@ -189,7 +189,7 @@
                             <img src="https://via.placeholder.com/40" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
                             <div>
                                 <p class="text-gray-800 font-bold">Michael Johnson</p>
-                                <p class="text-gray-600">CFO, Yet Another Company</p>
+                                <p class="text-gray-600">CFO, Dolor Company</p>
                             </div>
                         </div>
                     </div>

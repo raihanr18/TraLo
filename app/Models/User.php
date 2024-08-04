@@ -16,12 +16,18 @@ class User extends Authenticatable
         'foto',
         'email',
         'password',
+        'phone',
         'role',
         'otp',
     ];
 
-    public function pesanTikets()
+    public function reviews()
     {
-        return $this->hasMany(PesanTiket::class, 'id_user');
+        return $this->hasMany(Review::class, 'user_id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Tiket::class, 'user_id');
     }
 }

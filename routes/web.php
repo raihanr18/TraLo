@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\Tiket;
+use App\Http\Controllers\Transaction;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AuthUser;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\ResetController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MyticketController;
 use App\Http\Controllers\MyorderController;
 use App\Http\Controllers\MyaccountController;
@@ -24,50 +25,68 @@ use App\Http\Controllers\ForgotPasswordController;
 |
 */
 
-//Welcome
+// Welcome Page
 Route::get('/', function () {
     return view('index');
 })->name('index');
 
-//Login
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+// Authentication Routes
+Route::middleware(['guest'])->group(function () {
+    // Login
+    Route::get('/login', [AuthUser::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthUser::class, 'login'])->name('login.post');
+    
+    // Register
+    Route::get('/signup', [AuthUser::class, 'showSignupForm'])->name('signup.form');
+    Route::post('/signup', [AuthUser::class, 'signup'])->name('signup');
+    Route::get('/verification', [AuthUser::class, 'showVerificationForm'])->name('verification.form');
+    Route::post('/verification-process', [AuthUser::class, 'verify'])->name('verify');
 
-//Register
-Route::get('/signup', [RegisterController::class, 'showSignupForm'])->name('signup.form');
-Route::post('/signup', [RegisterController::class, 'signup'])->name('signup');
-Route::get('/verification', [RegisterController::class, 'showVerificationForm'])->name('verification.form');
-Route::post('/verification', [RegisterController::class, 'verify'])->name('verify');
+    // Forgot Password
+    Route::get('/forgotpassword', [ForgotPasswordController::class, 'showsforgotpassword'])->name('forgotpassword');
+    Route::post('/forgotpassword', [ForgotPasswordController::class, 'forgotpassword']);
 
+    // OTP
+    Route::post('/send-otp', [ForgotPasswordController::class, 'sendOtp'])->name('sendOtp');
+    Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOtp'])->name('verifyOtp');
 
+    // Search
+    Route::get('/search', [Dashboard::class, 'search'])->name('search');
+});
 
-Route::get('/forgotpassword', [ForgotPasswordController::class, 'showsforgotpassword'])->name('forgotpassword');
-Route::post('/forgotpassword', [ForgotPasswordController::class, 'forgotpassword']);
-Route::post('/send-otp', [ForgotPasswordController::class, 'sendOtp'])->name('sendOtp');
-Route::post('/verify-otp', [ForgotPasswordController::class, 'verifyOtp'])->name('verifyOtp');
+// Authenticated Routes
+Route::middleware(['auth'])->group(function () {
+    // Logout
+    Route::post('/logout', [AuthUser::class, 'logout'])->name('logout');
+    
+    // Dashboard
+    Route::get('/dashboard', [Dashboard::class, 'showdashboard'])->name('dashboard');
 
-Route::get('/reset-password', function () {
-    return view('resetpassword'); 
-})->name('showResetPasswordForm');
-Route::post('/reset-password', [ResetController::class, 'resetPassword'])->name('resetPassword');
+    // Ticket Routes
+    Route::get('/tiket', [Transaction::class, 'showTiket'])->name('tiket.page');
+    
+    // Wisata
+    Route::get('/wisata/{id}', [Dashboard::class, 'viewWisata'])->name('view.wisata');
+    Route::post('/wisata/pesan', [Transaction::class, 'tambahPesanan'])->name('pesan.wisata');
+    
 
-Route::get('/dashboard', [DashboardController::class, 'showdashboard'])->middleware('auth')->name('dashboard');
-Route::post('/dashboard', [DashboardController::class, 'showdashboard'])->name('dashboard');
-Route::get('/search', [DashboardController::class, 'search'])->name('search');
+    // Order Routes
+    Route::get('/pesanan', [Transaction::class, 'showPesanan'])->name('pesanan.page');
+    Route::delete('/pesanan/{id}/batal', [Transaction::class, 'batalkanPesanan'])->name('pesanan.batal');
+    Route::post('/pesanan/{id}/pembayaran', [Transaction::class, 'lanjutkanPembayaran'])->name('pesanan.lanjutkan');
 
-Route::get('/myticket', [MyticketController::class, 'showmyticket'])->name('myticket');
-Route::post('/myticket', [MyticketController::class, 'showmyticket'])->name('myticket');
+    // User Profile
+    Route::get('/profile-user', [AuthUser::class, 'showProfile'])->name('profile.page');
+    Route::post('/profile-update', [AuthUser::class, 'updateProfile'])->name('profile.update');
 
-Route::get('/myorder', [MyorderController::class, 'showmyorder'])->name('myorder');
-Route::put('/myorder/batalkan/{id}', [MyorderController::class, 'batalkanPemesanan'])->name('batalkanPemesanan');
+    // Reset Password
+    Route::get('/reset-password', function () {
+        return view('resetpassword'); 
+    })->name('showResetPasswordForm');
+    Route::post('/reset-password', [ResetController::class, 'resetPassword'])->name('resetPassword');
+});
 
-Route::get('/myaccount', [MyaccountController::class, 'showmyaccount'])->name('myaccount');
-Route::post('/myaccount', [MyaccountController::class, 'showmyaccount'])->name('myaccount');
-Route::post('/update-profile-picture', [MyaccountController::class, 'updateProfilePicture'])->name('updateProfilePicture');
-
-Route::get('/membuatpesanan/{id_wisata}', [MembuatPesananController::class, 'showmembuatpesanan'])->name('membuatpesanan');
-Route::post('/store-order', [MembuatPesananController::class, 'storeOrder'])->name('store.order');
-
-Route::get('/metodepembayaran/{id_pesan}', [MetodePembayaranController::class, 'showmetodepembayaran'])->name('metodepembayaran');
-Route::post('/metodepembayaran/{id_pesan}', [MetodePembayaranController::class, 'showmetodepembayaran'])->name('metodepembayaran');
-Route::post('/bayar/{id_pesan}', [MetodePembayaranController::class, 'bayar'])->name('bayar');
+// Testing Route
+Route::get('/testing', function(){
+    return view('menu.transaction.pembayaran');
+});

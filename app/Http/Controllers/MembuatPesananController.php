@@ -33,15 +33,15 @@ class MembuatPesananController extends Controller
         $harga_total = $harga_wisata * $jumlah_tiket;
 
         // Menyimpan pesanan ke dalam database
-        PesanTiket::create([
-            'id_user' => $id_user,
-            'id_wisata' => $id_wisata,
-            'tanggal_kunjungan' => $tanggal_kunjungan,
-            'jumlah_tiket' => $jumlah_tiket,
-            'harga_total' => $harga_total,
-            'metode_pembayaran' => 'belum bayar', // Default metode pembayaran, bisa disesuaikan
-            'status_pembayaran' => 'proses', // Status pembayaran default
-        ]);
+        // PesanTiket::create([
+        //     'id_user' => $id_user,
+        //     'id_wisata' => $id_wisata,
+        //     'tanggal_kunjungan' => $tanggal_kunjungan,
+        //     'jumlah_tiket' => $jumlah_tiket,
+        //     'harga_total' => $harga_total,
+        //     'metode_pembayaran' => 'belum bayar', // Default metode pembayaran, bisa disesuaikan
+        //     'status_pembayaran' => 'proses', // Status pembayaran default
+        // ]);
 
         return redirect()->route('myorder')->with('success', 'Pesanan berhasil dibuat!');
     }
